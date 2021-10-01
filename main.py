@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
-app = Flask(__name__)
+application = Flask(__name__)
 
 dic = {0 : 'Mask Wear Ok', 1 : 'Mask Below Nose',2: "Mask On Chin Please wear properly",3: "Please wear mask"}
 
@@ -22,15 +22,15 @@ def predict_label(img_path):
 	return dic[i]
 
 # routes
-@app.route("/", methods=['GET', 'POST'])
+@application.route("/", methods=['GET', 'POST'])
 def main():
 	return render_template("index.html")
 
-@app.route("/about")
+@application.route("/about")
 def about_page():
 	return "Msdhoni!!!"
 
-@app.route("/submit", methods = ['GET', 'POST'])
+@application.route("/submit", methods = ['GET', 'POST'])
 def get_output():
 	if request.method == 'POST':
 		img = request.files['my_image']
@@ -45,4 +45,4 @@ def get_output():
 
 if __name__ =='__main__':
 	#app.debug = True
-	app.run(debug = True)
+	application.run(debug = True)
